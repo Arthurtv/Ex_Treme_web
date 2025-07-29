@@ -3,12 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Catálogo de Filmes</title>
-<link rel="stylesheet" href="/styles.css" />
-  <script type="module" src="/main.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Firebase -->
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Firebase (Compat mode) -->
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
+  <!-- App JS (type=\"module\" garante suporte a import/export) -->
+  <script type="module" src="/main.js"></script>
 </head>
 <body>
   <header>🎬 Meu Catálogo de Filmes</header>
@@ -18,7 +23,7 @@
   <!-- Modal -->
   <div class="modal" id="movieModal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">✖</span>
+      <span class="close-btn" id="closeModal">✖</span>
       <h2 id="modalTitle"></h2>
       <p><strong>Ano:</strong> <span id="modalYear"></span></p>
       <p><strong>Gêneros:</strong> <span id="modalGenres"></span></p>
