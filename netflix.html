@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Catálogo de Filmes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Firebase -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore-compat.js"></script>
+
   <!-- Estilos -->
   <style>
     body {
@@ -123,7 +124,7 @@
   </div>
 
   <script>
-    // 🔧 Firebase config
+    // ✅ Firebase Config (SUBSTITUA PELOS SEUS DADOS)
     const firebaseConfig = {
       apiKey: "AIzaSyBV3NjtfC1ChD86vWpkuuNECbkWcpWIBuE",
         authDomain: "admapk-307fd.firebaseapp.com",
@@ -133,33 +134,41 @@
         appId: "1:666417457980:web:70bab921ff5203d133cc39"
     };
 
+    // ✅ Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // 🔄 Carregar os filmes
     async function loadMovies() {
       const grid = document.getElementById("movieGrid");
-      const snapshot = await db.collection("movies").orderBy("last_updated", "desc").get();
+      grid.innerHTML = "";
 
-      snapshot.forEach(doc => {
-        const movie = doc.data();
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="${movie.poster}" alt="Poster">
-          <div class="info">
-            <h3>${movie.title}</h3>
-            <span>${movie.year} • ⭐ ${movie.rating}</span>
-          </div>
-        `;
-        card.onclick = () => showModal(movie);
-        grid.appendChild(card);
-      });
+      try {
+        const snapshot = await db.collection("movies").orderBy("last_updated", "desc").get();
+        snapshot.forEach(doc => {
+          const movie = doc.data();
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${movie.poster}" alt="Poster">
+            <div class="info">
+              <h3>${movie.title}</h3>
+              <span>${movie.year} • ⭐ ${movie.rating}</span>
+            </div>
+          `;
+          card.onclick = () => showModal(movie);
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        console.error("Erro ao carregar filmes:", e.message);
+        grid.innerHTML = "<p style='color:red; padding:20px;'>Erro ao carregar filmes. Verifique a configuração do Firebase.</p>";
+      }
     }
 
     function showModal(movie) {
       document.getElementById("modalTitle").innerText = movie.title;
       document.getElementById("modalYear").innerText = movie.year;
-      document.getElementById("modalGenres").innerText = movie.genres.join(", ");
+      document.getElementById("modalGenres").innerText = movie.genres?.join(", ") || "N/A";
       document.getElementById("modalRuntime").innerText = movie.runtime;
       document.getElementById("modalRating").innerText = movie.rating;
       document.getElementById("modalOverview").innerText = movie.overview;
