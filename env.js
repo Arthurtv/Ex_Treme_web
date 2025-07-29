@@ -1,0 +1,8 @@
+window.env = {
+  FIREBASE_API_KEY: "AIzaSyBV3NjtfC1ChD86vWpkuuNECbkWcpWIBuE",
+  FIREBASE_AUTH_DOMAIN: "admapk-307fd.firebaseapp.com",
+  FIREBASE_PROJECT_ID: "admapk-307fd",
+  FIREBASE_STORAGE_BUCKET: "admapk-307fd.appspot.com",
+  FIREBASE_MESSAGING_SENDER_ID: "666417457980",
+  FIREBASE_APP_ID: "1:666417457980:web:70bab921ff5203d133cc39",
+};
