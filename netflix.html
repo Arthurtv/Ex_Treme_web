@@ -126,13 +126,13 @@
   <script>
     // ✅ Firebase Config (SUBSTITUA PELOS SEUS DADOS)
     const firebaseConfig = {
-      apiKey: "AIzaSyBV3NjtfC1ChD86vWpkuuNECbkWcpWIBuE",
-        authDomain: "admapk-307fd.firebaseapp.com",
-        projectId: "admapk-307fd",
-        storageBucket: "admapk-307fd.appspot.com",
-        messagingSenderId: "666417457980",
-        appId: "1:666417457980:web:70bab921ff5203d133cc39"
-    };
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+};
 
     // ✅ Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
